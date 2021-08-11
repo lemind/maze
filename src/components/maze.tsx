@@ -1,5 +1,6 @@
 import React from 'react'
 import mazeGenerator from 'generate-maze'
+import classnames from 'classnames'
 import './maze.css'
 
 type TMazeItem = {
@@ -16,11 +17,20 @@ type TProps = {
 }
 
 function MazeItem({mazeItem}: TProps) {
-  return <span className="Item">{mazeItem.x}_{mazeItem.y}</span>
+  const bordersScheme = {
+    Item_bottom: mazeItem.bottom,
+    Item_left: mazeItem.left,
+    Item_right: mazeItem.right,
+    Item_top: mazeItem.top,
+  }
+  const itemClassName = classnames('Item', bordersScheme)
+  return <span className={itemClassName}></span>
 }
 
+const MAZE_SIZE = 10
+
 export default function Maze() {
-  const maze = mazeGenerator(5)
+  const maze = mazeGenerator(MAZE_SIZE)
 
   console.log(maze)
 

@@ -1,9 +1,28 @@
 
 .Line {
-  margin: 5px;
+  height: 35px;
 }
 
 .Item {
   color: blue;
-  margin: 5px;
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  border: 1px solid white;
+}
+
+.Item_top {
+  border-top: 1px solid green;
+}
+
+.Item_bottom {
+  border-bottom: 1px solid green;
+}
+
+.Item_left {
+  border-left: 1px solid green;
+}
+
+.Item_right {
+  border-right: 1px solid green;
 }
