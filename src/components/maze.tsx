@@ -2,7 +2,15 @@ import React from 'react'
 import mazeGenerator from 'generate-maze'
 import './maze.css'
 
-type TMazeItem = any
+type TMazeItem = {
+  bottom: boolean
+  left: boolean
+  right: boolean
+  set: number
+  top: boolean
+  x: number
+  y: number
+}
 type TProps = {
   mazeItem: TMazeItem,
 }
