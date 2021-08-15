@@ -2,6 +2,7 @@ import React from 'react'
 import mazeGenerator from 'generate-maze'
 import classnames from 'classnames'
 import './maze.css'
+import MazeCursor from './MazeCursor'
 
 type TMazeItem = {
   bottom: boolean
@@ -32,19 +33,21 @@ const MAZE_SIZE = 10
 export default function Maze() {
   const maze = mazeGenerator(MAZE_SIZE)
 
-  console.log(maze)
-
   return (
     <div>
-      <h3>maze</h3>
+      <h3>Maze</h3>
 
-      {maze.map(line => {
-        return <div className="Line">{
-          line.map((el: any) => {
-            return <MazeItem mazeItem={el} />
-          })
-        }</div>
-      })}
+      <div className="MazeWrapper">
+        {maze.map(line => {
+          return <div className="Line">{
+            line.map((el: any) => {
+              return <MazeItem mazeItem={el} />
+            })
+          }</div>
+        })}
+
+        <MazeCursor bla />
+      </div>
     </div>
   )
 }

@@ -1,0 +1,8 @@
+
+.Cursor {
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background: #c51111;
+  position: absolute;
+}

@@ -1,14 +1,23 @@
 
+/* ToDo adjust size  */
+.MazeWrapper {
+  position: relative;
+  width: 380px;
+  height: 380px;
+  margin: 0 auto;
+}
+
 .Line {
-  height: 35px;
+  height: 37px;
 }
 
 .Item {
   color: blue;
-  width: 35px;
-  height: 35px;
+  width: 36px;
+  height: 36px;
   display: inline-block;
   border: 1px solid white;
+  margin-left: -1px;
 }
 
 .Item_top {
