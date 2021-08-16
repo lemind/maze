@@ -1,37 +1,74 @@
 import React, { useEffect, useState } from 'react'
 import './mazeCursor.css'
+import { TMazeScheme } from './Maze'
 
 type TProps = {
-  bla: boolean,
+  mazeScheme: TMazeScheme,
 }
 
-// ToDo: make pace very precise
+enum Direction {
+  Up,
+  Down,
+  Left,
+  Right,
+}
+
+type TCursorPlace = {
+  X: number,
+  Y: number
+}
+
+// ToDo: make pace adjustable to a maze size
 const PACE = 37
 const INIT_MARGIN_Y = 9
 const INIT_MARGIN_X = 13
 
-export default function MazeCursor({bla}: TProps) {
+export default function MazeCursor({mazeScheme}: TProps) {
   const [cursorPlaceX, setCursorPlaceX] = useState(0)
   const [cursorPlaceY, setCursorPlaceY] = useState(0)
 
+  // ToDo: moveOut
+  const canMoveThisWay = (cursorPlace: TCursorPlace, direction: Direction, mazeScheme: TMazeScheme) => {
+    const targetCell = mazeScheme[cursorPlace.Y][cursorPlace.X]
+
+    let isThereBorder: boolean
+    switch (direction) {
+      case Direction.Left:
+        isThereBorder = targetCell.left
+        break;
+      case Direction.Up:
+        isThereBorder = targetCell.top
+        break;
+      case Direction.Right:
+        isThereBorder = targetCell.right
+        break;
+      case Direction.Down:
+        isThereBorder = targetCell.bottom
+        break;
+    }
+
+    return !isThereBorder
+  }
+
   const handleKeyDown = (e: any) => {
+    const canMove = (direction: Direction) => canMoveThisWay({X: cursorPlaceX, Y: cursorPlaceY}, direction, mazeScheme)
+
     switch (e.keyCode) {
       case 37:
-        console.log('left');
-        setCursorPlaceX(cursorPlaceX - PACE)
+        canMove(Direction.Left)
+          && setCursorPlaceX(cursorPlaceX - 1)
         break;
       case 38:
-        console.log('up');
-        setCursorPlaceY(cursorPlaceY - PACE)
+        canMove(Direction.Up)
+          && setCursorPlaceY(cursorPlaceY - 1)
         break;
       case 39:
-        console.log('right', cursorPlaceX, cursorPlaceX + PACE);
-        setCursorPlaceX(cursorPlaceX + PACE)
+        canMove(Direction.Right)
+          && setCursorPlaceX(cursorPlaceX + 1)
         break;
       case 40:
-        console.log('down', cursorPlaceY, cursorPlaceY + PACE);
-        setCursorPlaceY(cursorPlaceY + PACE)
-
+        canMove(Direction.Down)
+          && setCursorPlaceY(cursorPlaceY + 1)
         break;
     }
   }
@@ -45,8 +82,8 @@ export default function MazeCursor({bla}: TProps) {
   }, [cursorPlaceX, cursorPlaceY])
 
   const cursorStyle = {
-    top: `${INIT_MARGIN_Y + cursorPlaceY}px`,
-    left: `${INIT_MARGIN_X + cursorPlaceX}px`,
+    top: `${INIT_MARGIN_Y + cursorPlaceY * PACE}px`,
+    left: `${INIT_MARGIN_X + cursorPlaceX * PACE}px`,
   };
 
   return (

@@ -17,6 +17,8 @@ type TProps = {
   mazeItem: TMazeItem,
 }
 
+export type TMazeScheme = TMazeItem[][]
+
 function MazeItem({mazeItem}: TProps) {
   const bordersScheme = {
     Item_bottom: mazeItem.bottom,
@@ -46,7 +48,7 @@ export default function Maze() {
           }</div>
         })}
 
-        <MazeCursor bla />
+        <MazeCursor mazeScheme={maze} />
       </div>
     </div>
   )
