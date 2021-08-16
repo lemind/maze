@@ -4,6 +4,10 @@ import classnames from 'classnames'
 import './maze.css'
 import MazeCursor from './MazeCursor'
 
+type TProps = {
+  mazeSize: number,
+}
+
 type TMazeItem = {
   bottom: boolean
   left: boolean
@@ -13,33 +17,34 @@ type TMazeItem = {
   x: number
   y: number
 }
-type TProps = {
+type TItemProps = {
   mazeItem: TMazeItem,
+  mazeSize: number,
 }
 
 export type TMazeScheme = TMazeItem[][]
 
-const MAZE_SIZE = 10
+// ToDo: move out to consts
 const CELL_SIZE = 36 + 2 // 2 for borders
 
-function MazeItem({mazeItem}: TProps) {
+function MazeItem({mazeItem, mazeSize}: TItemProps) {
   const colorsScheme = {
     Item_bottom: mazeItem.bottom,
     Item_left: mazeItem.left,
     Item_right: mazeItem.right,
     Item_top: mazeItem.top,
     Item_start: mazeItem.x === 0 && mazeItem.y === 0,
-    Item_end: mazeItem.x === MAZE_SIZE - 1 && mazeItem.y === MAZE_SIZE - 1
+    Item_end: mazeItem.x === mazeSize - 1 && mazeItem.y === mazeSize - 1
   }
   const itemClassName = classnames('Item', colorsScheme)
   return <span className={itemClassName}></span>
 }
 
 
-export default function Maze() {
-  const maze = mazeGenerator(MAZE_SIZE)
+export default function Maze({mazeSize}: TProps) {
+  const maze = mazeGenerator(mazeSize)
   const wrapperStyle = {
-    width: `${MAZE_SIZE * CELL_SIZE}px`
+    width: `${mazeSize * CELL_SIZE}px`
   }
 
   return (
@@ -53,6 +58,7 @@ export default function Maze() {
               return <MazeItem
                 mazeItem={el}
                 data-testid="mz-item"
+                mazeSize={mazeSize}
                 key={`${el.x}_${el.y}`}
               />
             })
