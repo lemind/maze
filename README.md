@@ -9,8 +9,8 @@ Should implement maze
 ### plan to do
 
 - [x] init
-- [ ] draw maze
-- [ ] add controls
+- [x] draw maze
+- [x] add controls
 - [ ] add maze props
 - [ ] add time spent on a maze
 - [ ] tests
