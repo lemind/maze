@@ -46,11 +46,15 @@ export default function Maze() {
     <div>
       <h3>Maze</h3>
 
-      <div className="MazeWrapper" style={wrapperStyle}>
+      <div className="MazeWrapper" data-testid="mz-wrapper" style={wrapperStyle}>
         {maze.map(line => {
-          return <div className="Line">{
-            line.map((el: any) => {
-              return <MazeItem mazeItem={el} />
+          return <div className="Line" data-testid="mz-line">{
+            line.map((el: TMazeItem) => {
+              return <MazeItem
+                mazeItem={el}
+                data-testid="mz-item"
+                key={`${el.x}_${el.y}`}
+              />
             })
           }</div>
         })}
