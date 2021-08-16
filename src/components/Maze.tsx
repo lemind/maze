@@ -19,18 +19,21 @@ type TProps = {
 
 export type TMazeScheme = TMazeItem[][]
 
+const MAZE_SIZE = 10
+
 function MazeItem({mazeItem}: TProps) {
-  const bordersScheme = {
+  const colorsScheme = {
     Item_bottom: mazeItem.bottom,
     Item_left: mazeItem.left,
     Item_right: mazeItem.right,
     Item_top: mazeItem.top,
+    Item_start: mazeItem.x === 0 && mazeItem.y === 0,
+    Item_end: mazeItem.x === MAZE_SIZE - 1 && mazeItem.y === MAZE_SIZE - 1
   }
-  const itemClassName = classnames('Item', bordersScheme)
+  const itemClassName = classnames('Item', colorsScheme)
   return <span className={itemClassName}></span>
 }
 
-const MAZE_SIZE = 10
 
 export default function Maze() {
   const maze = mazeGenerator(MAZE_SIZE)

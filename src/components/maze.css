@@ -35,3 +35,11 @@
 .Item_right {
   border-right: 1px solid green;
 }
+
+.Item_start {
+  background: #b8c1f5;
+}
+
+.Item_end {
+  background: #b8f5c0;
+}
