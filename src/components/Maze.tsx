@@ -20,6 +20,7 @@ type TProps = {
 export type TMazeScheme = TMazeItem[][]
 
 const MAZE_SIZE = 10
+const CELL_SIZE = 36 + 2 // 2 for borders
 
 function MazeItem({mazeItem}: TProps) {
   const colorsScheme = {
@@ -37,12 +38,15 @@ function MazeItem({mazeItem}: TProps) {
 
 export default function Maze() {
   const maze = mazeGenerator(MAZE_SIZE)
+  const wrapperStyle = {
+    width: `${MAZE_SIZE * CELL_SIZE}px`
+  }
 
   return (
     <div>
       <h3>Maze</h3>
 
-      <div className="MazeWrapper">
+      <div className="MazeWrapper" style={wrapperStyle}>
         {maze.map(line => {
           return <div className="Line">{
             line.map((el: any) => {
