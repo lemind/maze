@@ -13,7 +13,7 @@ Should implement maze
 - [x] add controls
 - [ ] add maze props
 - [ ] add time spent on a maze
-- [ ] tests
+- [x] init tests
 - [ ] top players table
 
 

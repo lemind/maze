@@ -37,7 +37,7 @@ function MazeItem({mazeItem, mazeSize}: TItemProps) {
     Item_end: mazeItem.x === mazeSize - 1 && mazeItem.y === mazeSize - 1
   }
   const itemClassName = classnames('Item', colorsScheme)
-  return <span className={itemClassName}></span>
+  return <span className={itemClassName} data-testid="mz-item" />
 }
 
 
@@ -53,11 +53,10 @@ export default function Maze({mazeSize}: TProps) {
 
       <div className="MazeWrapper" data-testid="mz-wrapper" style={wrapperStyle}>
         {maze.map(line => {
-          return <div className="Line" data-testid="mz-line">{
+          return <div className="Line" key={line[0].y} data-testid="mz-line">{
             line.map((el: TMazeItem) => {
               return <MazeItem
                 mazeItem={el}
-                data-testid="mz-item"
                 mazeSize={mazeSize}
                 key={`${el.x}_${el.y}`}
               />
