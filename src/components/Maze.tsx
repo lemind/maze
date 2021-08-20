@@ -3,6 +3,7 @@ import mazeGenerator from 'generate-maze'
 import classnames from 'classnames'
 import './maze.css'
 import MazeCursor from './MazeCursor'
+import Timer from './Timer'
 
 type TProps = {
   mazeSize: number,
@@ -65,6 +66,7 @@ export default function Maze({mazeSize}: TProps) {
         })}
 
         <MazeCursor mazeScheme={maze} />
+        <Timer />
       </div>
     </div>
   )
