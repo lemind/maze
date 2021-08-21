@@ -74,6 +74,12 @@ export default function Maze({mazeSize}: TProps) {
   const stopHandle = () => {
     stop()
     intervalId.current && clearInterval(intervalId.current)
+    intervalId.current = undefined
+  }
+
+  const resetHandle = () => {
+    setTime('')
+    setInProgress(false)
   }
 
   return (
@@ -99,7 +105,10 @@ export default function Maze({mazeSize}: TProps) {
           inProgress={inProgress}
         />
 
-        <div className="MazeTimer">{time}</div>
+        <div className="MazePanel">
+          <div className="MazeTimer">{time}</div>
+          <button onClick={resetHandle}>Reset</button>
+        </div>
       </div>
     </div>
   )

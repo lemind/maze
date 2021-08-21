@@ -30,6 +30,7 @@ export default function useTimer() {
 
   const stop = () => {
     clearInterval(intervalId.current)
+    setTime(0)
   }
 
   const getTime = () => {

@@ -42,6 +42,13 @@
   background: #b8f5c0;
 }
 
-.MazeTimer {
+.MazePanel {
+  display: flex;
   margin-top: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.MazeTimer {
+  margin: 0px 15px;
 }
