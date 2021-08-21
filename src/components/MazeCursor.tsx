@@ -5,6 +5,7 @@ import { TMazeScheme } from './Maze'
 type TProps = {
   mazeScheme: TMazeScheme,
   onPosChanged?: (x: number, y: number) => void
+  inProgress: boolean
 }
 
 enum Direction {
@@ -24,13 +25,20 @@ const PACE = 37
 const INIT_MARGIN_Y = 9
 const INIT_MARGIN_X = 13
 
-export default function MazeCursor({mazeScheme, onPosChanged}: TProps) {
+export default function MazeCursor({mazeScheme, onPosChanged, inProgress}: TProps) {
   const [cursorPlaceX, setCursorPlaceX] = useState(0)
   const [cursorPlaceY, setCursorPlaceY] = useState(0)
 
   useEffect(() => {
     onPosChanged && onPosChanged(cursorPlaceX, cursorPlaceY)
   }, [cursorPlaceX, cursorPlaceY])
+
+  useEffect(() => {
+    if (!inProgress) {
+      setCursorPlaceY(0)
+      setCursorPlaceX(0)
+    }
+  }, [inProgress])
 
   // ToDo: moveOut
   const canMoveThisWay = (cursorPlace: TCursorPlace, direction: Direction, mazeScheme: TMazeScheme) => {

@@ -1,6 +1,7 @@
 import React, { useState, MutableRefObject, useRef } from 'react'
 import useTimer from "./hooks/useTimer"
 
+// To test useTimer
 export default function Timer() {
   const {start, stop, getTime} = useTimer()
   const [time, setTime] = useState('')

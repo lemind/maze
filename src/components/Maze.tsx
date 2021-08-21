@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState, useRef, MutableRefObject } from 'react'
 import mazeGenerator from 'generate-maze'
 import classnames from 'classnames'
 import './maze.css'
 import MazeCursor from './MazeCursor'
-import Timer from './Timer'
+import useTimer from './hooks/useTimer'
 
 type TProps = {
   mazeSize: number,
@@ -47,6 +47,34 @@ export default function Maze({mazeSize}: TProps) {
   const wrapperStyle = {
     width: `${mazeSize * CELL_SIZE}px`
   }
+  const {start, stop, getTime} = useTimer()
+  const [time, setTime] = useState('')
+  let intervalId: MutableRefObject<NodeJS.Timeout | undefined> = useRef()
+  const [inProgress, setInProgress] = useState(false)
+
+  const onCursorPosChanged = (x: number, y: number) => {
+
+    if ((x === 1 || y === 1) && !intervalId.current) {
+      startHandle()
+    }
+
+    if (x === mazeSize - 1 && y === mazeSize - 1) {
+      stopHandle()
+    }
+  }
+
+  const startHandle = () => {
+    setInProgress(true)
+    start()
+    intervalId.current = setInterval(() => {
+      setTime(getTime())
+    }, 900)
+  }
+
+  const stopHandle = () => {
+    stop()
+    intervalId.current && clearInterval(intervalId.current)
+  }
 
   return (
     <div>
@@ -65,8 +93,13 @@ export default function Maze({mazeSize}: TProps) {
           }</div>
         })}
 
-        <MazeCursor mazeScheme={maze} />
-        <Timer />
+        <MazeCursor
+          mazeScheme={maze}
+          onPosChanged={onCursorPosChanged}
+          inProgress={inProgress}
+        />
+
+        <div className="MazeTimer">{time}</div>
       </div>
     </div>
   )

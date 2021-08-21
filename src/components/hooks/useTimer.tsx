@@ -1,6 +1,6 @@
 import { useState, useRef, MutableRefObject, useEffect } from "react";
 
-// stackverflow solution
+// ToDo: stackverflow solution | reconsider
 function secondsToHms(d: number) {
   d = Number(d);
   var h = Math.floor(d / 3600);
