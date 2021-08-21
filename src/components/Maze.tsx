@@ -25,7 +25,7 @@ type TItemProps = {
 
 export type TMazeScheme = TMazeItem[][]
 
-// ToDo: move out to consts
+// ToDo: move to consts
 const CELL_SIZE = 36 + 2 // 2 for borders
 
 function MazeItem({mazeItem, mazeSize}: TItemProps) {

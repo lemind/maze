@@ -16,6 +16,7 @@ Should implement maze
 - [x] init tests
 - [ ] top players table
 - [ ] use context or redux for states
+- [ ] more tests
 
 
 
