@@ -1,0 +1,13 @@
+
+.SizeSetterWrapper {
+  display: flex;
+  align-items: center;
+  margin: 20px auto;
+  width: 100px;
+  justify-content: center;
+}
+
+.SizeSetterBtn {
+  margin: 10px;
+  padding: 10px;
+}

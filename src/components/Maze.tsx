@@ -1,4 +1,4 @@
-import React, { useState, useRef, MutableRefObject } from 'react'
+import React, { useState, useRef, MutableRefObject, useEffect } from 'react'
 import mazeGenerator from 'generate-maze'
 import classnames from 'classnames'
 import './maze.css'
@@ -78,9 +78,16 @@ export default function Maze({mazeSize}: TProps) {
   }
 
   const resetHandle = () => {
+    stopHandle()
     setTime('')
+    // ToDo: resonsider too hacky
+    setInProgress(true)
     setInProgress(false)
   }
+
+  useEffect(() => {
+    resetHandle()
+  }, [mazeSize])
 
   return (
     <div>
