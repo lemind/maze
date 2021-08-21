@@ -11,10 +11,11 @@ Should implement maze
 - [x] init
 - [x] draw maze
 - [x] add controls
-- [ ] add maze props
-- [ ] add time spent on a maze
+- [x] add maze props
+- [x] add time spent on a maze
 - [x] init tests
 - [ ] top players table
+- [ ] use context or redux for states
 
 
 
