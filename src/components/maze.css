@@ -5,6 +5,15 @@
   margin: 0 auto;
 }
 
+.MazeWinMsg {
+  display: none;
+  color: green;
+}
+
+.MazeWin .MazeWinMsg {
+  display: block;
+}
+
 .Line {
   height: 37px;
 }

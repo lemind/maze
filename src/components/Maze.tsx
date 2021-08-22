@@ -51,6 +51,7 @@ export default function Maze({mazeSize}: TProps) {
   const [time, setTime] = useState('')
   let intervalId: MutableRefObject<NodeJS.Timeout | undefined> = useRef()
   const [inProgress, setInProgress] = useState(false)
+  const [isWin, setIsWin] = useState(false)
 
   const onCursorPosChanged = (x: number, y: number) => {
 
@@ -60,6 +61,7 @@ export default function Maze({mazeSize}: TProps) {
 
     if (x === mazeSize - 1 && y === mazeSize - 1) {
       stopHandle()
+      setIsWin(true)
     }
   }
 
@@ -83,17 +85,22 @@ export default function Maze({mazeSize}: TProps) {
     // ToDo: resonsider too hacky
     setInProgress(true)
     setInProgress(false)
+    setIsWin(false)
   }
 
   useEffect(() => {
     resetHandle()
   }, [mazeSize])
 
+  const wrapperClassName = classnames('MazeWrapper', {
+    MazeWin: isWin
+  })
+
   return (
     <div>
       <h3>Maze</h3>
 
-      <div className="MazeWrapper" data-testid="mz-wrapper" style={wrapperStyle}>
+      <div className={wrapperClassName} data-testid="mz-wrapper" style={wrapperStyle}>
         {maze.map(line => {
           return <div className="Line" key={line[0].y} data-testid="mz-line">{
             line.map((el: TMazeItem) => {
@@ -113,6 +120,7 @@ export default function Maze({mazeSize}: TProps) {
         />
 
         <div className="MazePanel">
+          <div className="MazeWinMsg">Done it in</div>
           <div className="MazeTimer">{time}</div>
           <button onClick={resetHandle}>Reset</button>
         </div>
