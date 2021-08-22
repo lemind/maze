@@ -23,7 +23,7 @@ type TCursorPlace = {
 // ToDo: make pace adjustable to a maze size
 const PACE = 37
 const INIT_MARGIN_Y = 9
-const INIT_MARGIN_X = 13
+const INIT_MARGIN_X = 9
 
 export default function MazeCursor({mazeScheme, onPosChanged, inProgress}: TProps) {
   const [cursorPlaceX, setCursorPlaceX] = useState(0)
